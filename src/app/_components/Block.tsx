@@ -1,7 +1,6 @@
 'use client';
 
 import { useCounterState } from "~/hooks/useCounterState";
-import { AnimatePresence, motion } from "framer-motion";
 
 /**
  * Block Component
@@ -21,30 +20,14 @@ export const hexaMap: Record<number, string> = {
   14: 'E',
   15: 'F',
 };
-const textAnimation = {
-  initial: {
-    opacity: 0,
-    y: 100,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-  },
-  exit: {
-    opacity: 0,
-    y: -100,
-  },
-  transition: {
-    duration: 0.2,
-  },
-};
 
 interface BlockProps {
-  blockIndex: number;
+  value: number;
+  rangeIndex: number
 }
 
-export const Block = ({ blockIndex }: BlockProps) => {
-  const [counterState, setCounterState] = useCounterState();
+export const Block = ({ value, rangeIndex }: BlockProps) => {
+  const [counterState, _] = useCounterState();
   // internally, i will convert the number to the corresponding hexadecimal display.
   // this will reduce the complexity when trying to track and manage the display state.
   function computeHexaDisplay(value: number): string {
@@ -59,16 +42,10 @@ export const Block = ({ blockIndex }: BlockProps) => {
   }
 
   return (
-    <div className="flex items-center justify-center w-16 h-16 lg:w-28 lg:h-28 bg-black/5 dark:bg-white/5 rounded-xl shadow-md shadow-black/5 dark:shadow-white/5">
-      <motion.span
-        initial={textAnimation.initial}
-        animate={textAnimation.animate}
-        exit={textAnimation.exit}
-        transition={textAnimation.transition}
-        className="text-black dark:text-white text-3xl lg:text-6xl font-normal font-mono"
-      >
-        {counterState.blockType === 'hexadecimal' ? computeHexaDisplay(counterState.currentIndexes[blockIndex] ?? 0) : counterState.currentIndexes[blockIndex]}
-      </motion.span>
+    <div data-active={value === counterState.currentIndexes[rangeIndex]} className="flex items-center justify-center w-16 h-16 bg-black/5 dark:bg-white/5 rounded-xl shadow-md shadow-black/5 dark:shadow-white/5 data-[active=false]:opacity-20">
+      <span className="text-black dark:text-white text-3xl lg:text-6xl font-normal font-mono">
+        {counterState.blockType === 'hexadecimal' ? computeHexaDisplay(value) : value}
+      </span>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { useCounterState } from "~/hooks/useCounterState";
 import { hexaMap } from "./Block";
 
 export const NumberView = () => {
-  const [counterState, setCounterState] = useCounterState();
+  const [counterState, _] = useCounterState();
 
   function convertFromBaseNTo10(num: number[], base: number): number {
     let decimal = 0;
@@ -105,11 +105,11 @@ export const NumberView = () => {
         <span className="text-2xl lg:text-4xl text-black dark:text-white">
           {convertFromBaseNTo10(counterState.currentIndexes, getCurrentBase())}
         </span>
-      <div className="flex flex-col lg:flex-row gap-4 text-sm lg:text-base">
+      <div className="flex flex-row gap-4 text-sm lg:text-base">
         <span className="">{counterState.blockType}</span>
-        <span className="hidden lg:block text-gray-700 dark:text-gray-200">|</span>
+        <span className="text-gray-700 dark:text-gray-200">|</span>
         <span className="">{counterState.blockCount} blocks</span>
-        <span className="hidden lg:block text-gray-700 dark:text-gray-200">|</span>
+        <span className="text-gray-700 dark:text-gray-200">|</span>
         <span className="break-all">{getJoinedIndexesForDisplay()}</span>
       </div>
       <span>

@@ -1,3 +1,3 @@
-### counter
+### ginti.
 
-simpler way to understand counting.
+a simpler way to understand the number system.
