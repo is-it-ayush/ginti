@@ -105,7 +105,7 @@ export const metadata = {
     description: 'A simple way to understand number systems.',
     images: [
       {
-        url: './ginti_og.png',
+        url: '/ginti_og.png',
         alt: 'ginti. | A simple way to understand number systems. | by isitayush',
       },
     ],
