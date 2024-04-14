@@ -1,6 +1,7 @@
 import '~/styles/globals.css';
 
 import { Poppins, Space_Mono } from 'next/font/google';
+import { Metadata } from 'next';
 
 const font = Poppins({
   subsets: ['latin'],
@@ -14,7 +15,7 @@ const _ = Space_Mono({
   variable: '--font-mono',
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   applicationName: 'ginti.',
   title: 'ginti.',
   description: 'A simple way to understand number systems.',
@@ -107,10 +108,13 @@ export const metadata = {
       {
         url: '/ginti_og.png',
         alt: 'ginti. | A simple way to understand number systems. | by isitayush',
+        width: 1200,
+        height: 630,
       },
     ],
-    url: 'https://ginti.vercel.app',
+    url: 'https://ginti-eta.vercel.app',
   },
+  category: "education",
 };
 
 export default function RootLayout({
