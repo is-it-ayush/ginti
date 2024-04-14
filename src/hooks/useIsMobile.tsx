@@ -7,7 +7,9 @@ export function useIsMobile() {
     const userAgent = navigator.userAgent;
     const isSmall = window.matchMedia('(max-width: 768px)').matches;
     const isMobile = Boolean(
-      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.exec(userAgent),
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.exec(
+        userAgent,
+      ),
     );
 
     const isDev = process.env.NODE_ENV !== 'production';

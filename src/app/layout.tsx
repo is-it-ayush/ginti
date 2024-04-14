@@ -1,23 +1,23 @@
-import "~/styles/globals.css";
+import '~/styles/globals.css';
 
-import { Poppins, Space_Mono } from "next/font/google";
+import { Poppins, Space_Mono } from 'next/font/google';
 
 const font = Poppins({
-  subsets: ["latin"],
+  subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  variable: "--font-sans",
+  variable: '--font-sans',
 });
 
-const mono = Space_Mono({
-  subsets: ["latin"],
+const _ = Space_Mono({
+  subsets: ['latin'],
   weight: ['400', '700'],
-  variable: "--font-mono",
+  variable: '--font-mono',
 });
 
 export const metadata = {
   applicationName: 'ginti.',
   title: 'ginti.',
-  description: "A simple way to understand number systems.",
+  description: 'A simple way to understand number systems.',
   icons: [
     {
       rel: 'apple-touch-icon',
@@ -103,12 +103,14 @@ export const metadata = {
     type: 'website',
     title: 'ginti.',
     description: 'A simple way to understand number systems.',
-    images: [{
-      url: "./ginti_og.png",
-      alt: "ginti. | A simple way to understand number systems. | by isitayush",
-    }],
+    images: [
+      {
+        url: './ginti_og.png',
+        alt: 'ginti. | A simple way to understand number systems. | by isitayush',
+      },
+    ],
     url: 'https://ginti.vercel.app',
-  }
+  },
 };
 
 export default function RootLayout({

@@ -1,7 +1,13 @@
 'use client';
 
-import { type ReactNode, createContext, useContext, useState, useEffect } from "react";
-import { BlockType } from "~/app/_components/Block";
+import {
+  type ReactNode,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+} from 'react';
+import type { BlockType } from '~/app/_components/Block';
 
 type Theme = 'light' | 'dark';
 type CounterState = {
@@ -13,15 +19,25 @@ type CounterState = {
 };
 
 type HelperFunctions = {
-  computeRange: () => void,
-  clearIndexes: () => void,
-  setTheme: (theme: Theme) => void,
-}
-type CounterStateContextType = [CounterState, (updatedState: Partial<CounterState>) => void, HelperFunctions];
+  computeRange: () => void;
+  clearIndexes: () => void;
+  setTheme: (theme: Theme) => void;
+};
+type CounterStateContextType = [
+  CounterState,
+  (updatedState: Partial<CounterState>) => void,
+  HelperFunctions,
+];
 const CounterStateContext = createContext<CounterStateContextType | null>(null);
 
 export const CounterStateProvider = ({ children }: { children: ReactNode }) => {
-  const [state, setState] = useState<CounterState>({ blockType: 'binary', currentIndexes: [0], blockCount: 1, range: [0, 1], theme: "light" });
+  const [state, setState] = useState<CounterState>({
+    blockType: 'binary',
+    currentIndexes: [0],
+    blockCount: 1,
+    range: [0, 1],
+    theme: 'light',
+  });
 
   function updateState(updatedState: Partial<CounterState>) {
     setState((prevState) => ({ ...prevState, ...updatedState }));
@@ -30,10 +46,12 @@ export const CounterStateProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     computeRange();
     computeTheme();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- we only want to run this once.
   }, []);
 
   useEffect(() => {
     computeRange();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- nah...not feelin it.
   }, [state.blockType]);
 
   // computes the range and sets it based on state.blockType
@@ -49,25 +67,31 @@ export const CounterStateProvider = ({ children }: { children: ReactNode }) => {
         updateState({ range: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] });
         break;
       case 'hexadecimal':
-        updateState({ range: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] });
+        updateState({
+          range: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+        });
         break;
       default:
         updateState({ range: [0, 1] });
         break;
-    };
+    }
   }
 
   /// resets indexes to the minimum.
   function clearIndexes() {
     const rangeMin = state.range[0]!;
-    let newIndexes = Array.from<number>({ length: state.blockCount }).fill(rangeMin);
+    const newIndexes = Array.from<number>({ length: state.blockCount }).fill(
+      rangeMin,
+    );
     updateState({ currentIndexes: newIndexes });
   }
 
   // computes the theme based on the user's preference.
   function computeTheme() {
-    let mode: Theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    let localTheme = localStorage.getItem('theme') as Theme;
+    let mode: Theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+    const localTheme = localStorage.getItem('theme') as Theme;
     if (localTheme && (localTheme === 'light' || localTheme === 'dark')) {
       mode = localTheme;
     }
@@ -82,7 +106,17 @@ export const CounterStateProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <CounterStateContext.Provider value={[state, updateState, { computeRange: computeRange, clearIndexes: clearIndexes, setTheme: setTheme }]}>
+    <CounterStateContext.Provider
+      value={[
+        state,
+        updateState,
+        {
+          computeRange: computeRange,
+          clearIndexes: clearIndexes,
+          setTheme: setTheme,
+        },
+      ]}
+    >
       {children}
     </CounterStateContext.Provider>
   );
@@ -91,7 +125,9 @@ export const CounterStateProvider = ({ children }: { children: ReactNode }) => {
 export const useCounterState = () => {
   const context = useContext(CounterStateContext);
   if (!context) {
-    throw new Error("useCounterState must be used within a CounterStateProvider");
+    throw new Error(
+      'useCounterState must be used within a CounterStateProvider',
+    );
   }
   return context;
 };

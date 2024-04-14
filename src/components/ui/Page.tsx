@@ -1,5 +1,5 @@
 'use client';
-import { motion, type HTMLMotionProps } from "framer-motion";
+import { motion, type HTMLMotionProps } from 'framer-motion';
 
 const pageAnimation = {
   initial: {
@@ -16,10 +16,10 @@ const pageAnimation = {
   },
 };
 
-export const Page = ({ children, ...rest }: HTMLMotionProps<"div">) => {
+export const Page = ({ children, ...rest }: HTMLMotionProps<'div'>) => {
   return (
     <motion.main {...pageAnimation} {...rest}>
       {children}
     </motion.main>
   );
-}
+};
