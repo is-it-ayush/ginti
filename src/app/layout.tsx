@@ -106,7 +106,7 @@ export const metadata: Metadata = {
     description: 'A simple way to understand number systems.',
     images: [
       {
-        url: '/ginti_og.png',
+        url: 'https://ginti-eta.vercel.app/ginti_og.png',
         alt: 'ginti. | A simple way to understand number systems. | by isitayush',
         width: 1200,
         height: 630,
