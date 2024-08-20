@@ -1,5 +1,7 @@
 ### ginti.
 
+> Visit: [ginti.isitayush.dev](https://ginti.isitayush.dev/)
+
 ![img](./public/ginti_og.png)
 
 A simple way to understand the number system. This project is a fun
